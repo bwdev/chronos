@@ -1,55 +1,73 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { AppComponent } from './app.component';
-
-import { AppHeaderModule, AppFooterModule, AppAsideModule, AppSidebarModule, AppBreadcrumbModule } from '@coreui/angular';
-const COREUI = [
-  AppHeaderModule,
-  AppFooterModule,
-  AppAsideModule,
-  AppSidebarModule,
-  AppBreadcrumbModule
-];
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
-import { TabsModule, TabsetConfig } from 'ngx-bootstrap/tabs';
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+};
+
+import { AppComponent } from './app.component';
+
+// Import containers
+import { DefaultLayoutComponent } from './containers';
+
+import { P404Component } from './views/error/404.component';
+import { P500Component } from './views/error/500.component';
+import { LoginComponent } from './views/login/login.component';
+import { RegisterComponent } from './views/register/register.component';
+
+const APP_CONTAINERS = [
+  DefaultLayoutComponent
+];
+
+import {
+  AppAsideModule,
+  AppBreadcrumbModule,
+  AppHeaderModule,
+  AppFooterModule,
+  AppSidebarModule,
+} from '@coreui/angular';
+
+// Import routing module
+import { AppRoutingModule } from './app.routing';
+
+// Import 3rd party components
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
-import { RouterModule } from '@angular/router';
-import { AboutComponent } from './about/about.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AboutComponent,
-    DashboardComponent
-  ],
   imports: [
-    BrowserAnimationsModule,
-    RouterModule.forRoot([{
-      path: '',
-      component: DashboardComponent,
-      children: [{
-        path: '',
-        component: AboutComponent
-      }]
-    }]),
     BrowserModule,
-    TabsModule.forRoot(),
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    AppAsideModule,
+    AppBreadcrumbModule.forRoot(),
+    AppFooterModule,
+    AppHeaderModule,
+    AppSidebarModule,
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
-    ChartsModule,
-    COREUI
+    TabsModule.forRoot(),
+    ChartsModule
   ],
-  providers: [
-    TabsetConfig
+  declarations: [
+    AppComponent,
+    ...APP_CONTAINERS,
+    P404Component,
+    P500Component,
+    LoginComponent,
+    RegisterComponent
   ],
-  bootstrap: [AppComponent]
+  providers: [{
+    provide: LocationStrategy,
+    useClass: HashLocationStrategy
+  }],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }
