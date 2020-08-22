@@ -1,0 +1,187 @@
+// These styles are meant for reuse - any one-time styles should go in _custom.scss
+
+div.card {
+  div.card-header {
+    background-color: $gray-200;
+  }
+
+  &.card-primary {
+    border: 1px solid $primary;
+
+    div.card-header {
+      color: #fff;
+      background-color: $primary;
+    }
+  }
+
+  &.card-info {
+    border: 1px solid $info;
+
+    div.card-header {
+      color: #fff;
+      background-color: $info;
+    }
+  }
+
+  &.card-danger {
+    border: 1px solid $danger;
+
+    div.card-header {
+      color: #fff;
+      background-color: $danger;
+    }
+  }
+}
+
+div.card.card-danger {
+  border: 1px solid $danger;
+
+  div.card-header {
+    color: #fff;
+    background-color: $danger;
+  }
+}
+
+.block {
+  display: block !important;
+}
+
+.full {
+  width: 100%;
+}
+
+.form-control {
+  border: 1px solid $gray-300;
+}
+
+.mute-border {
+  border: 1px solid $gray-300;
+  border-radius: 3px;
+}
+
+.list-group-item.hoverable {
+  &:hover {
+    background-color: $gray-200;
+    cursor: pointer;
+  }
+}
+
+table.hoverable {
+  tbody {
+    tr:hover {
+      background-color: $gray-200;
+      cursor: pointer;
+    }
+  }
+}
+
+.table {
+  td.middle {
+    vertical-align: middle;
+  }
+}
+
+.inline.checkbox {
+  display: inline;
+
+  input[type="checkbox"] {
+    vertical-align: middle;
+    width: "auto";
+    height: 1.5m;
+  }
+}
+
+.underline {
+  border-bottom: 1px solid #afafaf;
+}
+
+ul.list-inline {
+  display: inline-flex;
+
+  li {
+    margin-left: 1em;
+  }
+
+  li.list-inline-title {
+    font-weight: bold;
+  }
+}
+
+.progress-line {
+  background-color: lighten($color: $primary, $amount: 50%);
+  display: -webkit-flex;
+  display: flex;
+
+  &:before {
+    background-color: $primary;
+    content: "";
+    -webkit-animation: running-progress 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    animation: running-progress 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+}
+
+.progress-line,
+.progress-line:before {
+  height: 10px;
+  width: 100%;
+  margin: 0;
+}
+
+@-webkit-keyframes running-progress {
+  0% {
+    margin-left: 0px;
+    margin-right: 100%;
+  }
+  50% {
+    margin-left: 25%;
+    margin-right: 0%;
+  }
+  100% {
+    margin-left: 100%;
+    margin-right: 0;
+  }
+}
+
+@keyframes running-progress {
+  0% {
+    margin-left: 0px;
+    margin-right: 100%;
+  }
+  50% {
+    margin-left: 25%;
+    margin-right: 0%;
+  }
+  100% {
+    margin-left: 100%;
+    margin-right: 0;
+  }
+}
+
+.uppercase {
+  text-transform: capitalize;
+}
+
+
+label.ng-invalid {
+  color: $danger;
+}
+
+.ng-invalid:not(form,label) {
+  border: 1px solid $danger;
+}
+
+.caps {
+  text-transform: capitalize;
+}
+
+.text-gray600 {
+  color: $gray-600;
+}
+
+.text-gold {
+  color: $gold !important;
+}
+
+.text-goldenrod {
+  color: goldenrod;
+}
