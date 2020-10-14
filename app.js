@@ -1,10 +1,6 @@
 const { app, BrowserWindow, Menu, Tray } = require('electron');
 const url = require('url');
 const path = require('path');
-const { Browser } = require('protractor');
-
-// Enable live reload for all the files inside your project directory
-require('electron-reload')(__dirname);
 
 let appWindow;
 let tray;
@@ -15,7 +11,9 @@ function initWindow() {
     height: 800,
     webPreferences: {
       nodeIntegration: true
-    }
+    },
+    closable: true,
+    modal: true
   });
 
   appWindow.loadURL(
@@ -26,24 +24,20 @@ function initWindow() {
     })
   );
 
-  tray = new Tray(path.join(__dirname, 'src/assets/img/icons/hourglass_white.png'));
-  const contextMenu = Menu.buildFromTemplate([
-    { label: 'Item1', type: 'radio' },
-    { label: 'Item2', type: 'radio' },
-    { label: 'Item3', type: 'radio', checked: false },
-    { label: 'Item4', type: 'radio' }
-  ])
-  tray.setToolTip('This is my application.')
-  tray.setContextMenu(contextMenu)
+  appWindow.hide();
 
   // Initialize the DevTools.
   appWindow.webContents.openDevTools()
+
+  tray = t.createTray(appWindow);
 
   appWindow.on('closed', function () {
     appWindow = null
   })
 
 }
+
+
 
 app.on('ready', initWindow);
 
